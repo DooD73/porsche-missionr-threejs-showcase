@@ -1,8 +1,7 @@
 import * as THREE from 'three';
 import Experience from '../Experience';
-import Debug from '../Utils/Debug';
-import vertexShader from '../shaders/floor/vertex.glsl';
-import fragmentShader from '../shaders/floor/fragment.glsl';
+import vertexShader from '../Shaders/floor/vertex.glsl';
+import fragmentShader from '../Shaders/floor/fragment.glsl';
 
 export default class Floor {
     constructor() {
