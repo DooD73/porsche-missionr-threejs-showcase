@@ -4,15 +4,15 @@ import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader';
 import EventEmitter from './EventEmitter';
 
 export default class Resources extends EventEmitter {
-    constructor(sources) {
+    constructor(assets) {
         super();
 
         // Options
-        this.sources = sources;
+        this.assets = assets;
 
         // Setup
         this.items = {};
-        this.toLoad = this.sources.length;
+        this.toLoad = this.assets.length;
         this.loaded = 0;
 
         this.setLoaders();
@@ -33,7 +33,7 @@ export default class Resources extends EventEmitter {
 
     startLoading() {
         // Load each source
-        for (const source of this.sources) {
+        for (const source of this.assets) {
             if (source.type === 'gltf') {
                 this.loaders.gltfLoader.load(source.path, (file) => {
                     this.sourceLoaded(source, file);

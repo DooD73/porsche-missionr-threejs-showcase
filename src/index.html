@@ -3,11 +3,85 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Vite ThreeJS Template⚡</title>
+        <title>Porsche - Mission R</title>
+
+        <!-- FAVICON -->
         <link rel="icon" href="/favicon.ico" />
+
+        <!-- FONTS -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- ICONS -->
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+        />
     </head>
     <body>
         <canvas class="webgl"></canvas>
+
+        <header>
+            <nav>
+                <div class="container">
+                    <div class="logo">
+                        <img
+                            src="images/logo.png"
+                            alt="Porsche Mission R Logo"
+                        />
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div class="container">
+                <div class="row">
+                    <div class="col-m-50">
+                        <div class="copyright">
+                            <p>
+                                <span>Model by</span>
+                                <a
+                                    class="cta-underline"
+                                    href="https://sketchfab.com/sohyalebret"
+                                    target="_blank"
+                                    >kevin (ケビン)</a
+                                >
+                            </p>
+                            <a
+                                class="cta-underline"
+                                href="https://www.porsche.com/"
+                                target="_blank"
+                                >Porsche Official Website</a
+                            >
+                        </div>
+                    </div>
+                    <div class="col-m-50">
+                        <div class="control-panel">
+                            <div class="cta" id="lights">
+                                <span class="material-symbols-outlined"
+                                    >flash_on</span
+                                >
+                            </div>
+                            <div class="cta" id="sound">
+                                <span class="material-symbols-outlined"
+                                    >volume_off</span
+                                >
+                            </div>
+                            <div class="cta" id="pov">
+                                <span class="material-symbols-outlined"
+                                    >visibility</span
+                                >
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
         <script type="module" src="./script.js"></script>
     </body>
 </html>

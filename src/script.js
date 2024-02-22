@@ -1,8 +1,6 @@
 import './style.css';
 import Experience from './Experience/Experience';
 
-const experience = new Experience(document.querySelector('canvas.webgl'));
-
 console.log(
     `                            ,----,          
                           ,/   .\`|          
@@ -26,3 +24,17 @@ console.log(
     'color: #ffe564',
     'color: #ff7e67'
 );
+
+const experience = new Experience(document.querySelector('canvas.webgl'));
+
+const cta = document.querySelectorAll('.cta');
+
+cta.forEach((el) => {
+    el.addEventListener('click', () => {
+        if (el.classList.contains('active')) {
+            el.classList.remove('active');
+        } else {
+            el.classList.add('active');
+        }
+    });
+});

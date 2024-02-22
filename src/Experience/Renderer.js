@@ -1,6 +1,8 @@
 import * as THREE from 'three';
 import Experience from './Experience';
 
+const povDOM = document.getElementById('pov');
+
 export default class Renderer {
     constructor() {
         this.experience = new Experience();
@@ -33,6 +35,10 @@ export default class Renderer {
     }
 
     update() {
-        this.instance.render(this.scene, this.camera.instance);
+        if (povDOM.classList.contains('active')) {
+            this.instance.render(this.scene, this.camera.povCamera);
+        } else {
+            this.instance.render(this.scene, this.camera.instance);
+        }
     }
 }

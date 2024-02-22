@@ -1,5 +1,7 @@
-import * as THREE from 'three';
 import Experience from '../Experience';
+import Car from './Car';
+import Environment from './Environment';
+import Floor from './Floor';
 
 export default class World {
     constructor() {
@@ -7,17 +9,24 @@ export default class World {
         this.scene = this.experience.scene;
         this.resources = this.experience.resources;
 
-        //Test Mesh
-        const geometry = new THREE.BoxGeometry(1, 1, 1);
-        const material = new THREE.MeshBasicMaterial({ color: 0x00ffff });
-        const mesh = new THREE.Mesh(geometry, material);
-        this.scene.add(mesh);
-
         // Wait for resources
         this.resources.on('ready', () => {
             // Setup
+            this.floor = new Floor();
+            this.car = new Car();
+            this.environment = new Environment();
         });
     }
 
-    update() {}
+    update() {
+        if (this.floor) {
+            this.floor.update();
+        }
+        if (this.car) {
+            this.car.update();
+        }
+        if (this.environment) {
+            this.environment.update();
+        }
+    }
 }
