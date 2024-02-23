@@ -38,6 +38,8 @@ export default class Camera {
         this.povCamera = this.instance.clone();
         this.povCamera.position.set(0.35, 1.1, -0.45);
         this.povCamera.rotation.y = Math.PI;
+        this.povCamera.rotation.x = 0; // Fix camera tilt
+        this.povCamera.rotation.z = 0; // Fix camera tilt
         this.scene.add(this.povCamera);
 
         // PovCamera helpers
