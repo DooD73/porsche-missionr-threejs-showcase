@@ -42,22 +42,41 @@ export default class Resources extends EventEmitter {
                     (file) => {
                         this.sourceLoaded(source, file);
                     },
-                    (progress) => {
-                        this.overlay.style.clipPath = `inset(0 ${
-                            100 - (progress.loaded / progress.total) * 100
-                        }% 0 0)`;
+                    (xhr) => {
+                        this.onLoading(xhr);
                     }
                 );
             } else if (source.type === 'texture') {
-                this.loaders.textureLoader.load(source.path, (file) => {
-                    this.sourceLoaded(source, file);
-                });
+                this.loaders.textureLoader.load(
+                    source.path,
+                    (file) => {
+                        this.sourceLoaded(source, file);
+                    },
+                    (xhr) => {
+                        this.onLoading(xhr);
+                    }
+                );
             } else if (source.type === 'cubeTexture') {
-                this.loaders.cubeTextureLoader.load(source.path, (file) => {
-                    this.sourceLoaded(source, file);
-                });
+                this.loaders.cubeTextureLoader.load(
+                    source.path,
+                    (file) => {
+                        this.sourceLoaded(source, file);
+                    },
+                    (xhr) => {
+                        this.onLoading(xhr);
+                    }
+                );
             }
         }
+    }
+
+    onLoading(xhr) {
+        // Update loading bar
+        console.log('Loading progress:', (xhr.loaded / xhr.total) * 100); // Log the loading progress
+        this.overlay.style.clipPath = `inset(0 ${
+            100 - (xhr.loaded / xhr.total) * 100
+        }% 0 0)`;
+        console.log('Overlay clipPath style:', this.overlay.style.clipPath); // Log the applied style
     }
 
     sourceLoaded(source, file) {
@@ -67,6 +86,9 @@ export default class Resources extends EventEmitter {
 
         if (this.loaded === this.toLoad) {
             this.preloader.style.opacity = 0;
+            setTimeout(() => {
+                this.preloader.style.display = 'none';
+            }, 1000);
             this.trigger('ready');
         }
     }
