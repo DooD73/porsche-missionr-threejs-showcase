@@ -73,11 +73,9 @@ export default class Resources extends EventEmitter {
     onLoading() {
         // Update loading bar based on the number of assets loaded
         const progress = (this.loaded / this.toLoad) * 100;
-        console.log('Loading progress:', progress); // Log the loading progress
 
         // Update loading bar
         this.overlay.style.clipPath = `inset(0 ${100 - progress}% 0 0)`;
-        console.log('Overlay clipPath style:', this.overlay.style.clipPath); // Log the applied style
     }
 
     sourceLoaded(source, file) {
