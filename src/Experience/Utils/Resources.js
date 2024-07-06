@@ -70,12 +70,13 @@ export default class Resources extends EventEmitter {
         }
     }
 
-    onLoading(xhr) {
+    onLoading() {
+        // Update loading bar based on the number of assets loaded
+        const progress = (this.loaded / this.toLoad) * 100;
+        console.log('Loading progress:', progress); // Log the loading progress
+
         // Update loading bar
-        console.log('Loading progress:', (xhr.loaded / xhr.total) * 100); // Log the loading progress
-        this.overlay.style.clipPath = `inset(0 ${
-            100 - (xhr.loaded / xhr.total) * 100
-        }% 0 0)`;
+        this.overlay.style.clipPath = `inset(0 ${100 - progress}% 0 0)`;
         console.log('Overlay clipPath style:', this.overlay.style.clipPath); // Log the applied style
     }
 
@@ -83,6 +84,7 @@ export default class Resources extends EventEmitter {
         this.items[source.name] = file;
 
         this.loaded++;
+        this.onLoading();
 
         if (this.loaded === this.toLoad) {
             this.preloader.style.opacity = 0;
