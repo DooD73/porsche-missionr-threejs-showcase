@@ -22,6 +22,7 @@ export default class Camera {
             100
         );
         this.instance.position.set(4, 1.5, 6);
+        if (window.innerWidth < 768) this.instance.position.set(0, 1.5, 15);
         this.scene.add(this.instance);
     }
 
