@@ -14,6 +14,8 @@ export default class Resources extends EventEmitter {
         this.items = {};
         this.toLoad = this.assets.length;
         this.loaded = 0;
+        this.preloader = document.querySelector('.preloader');
+        this.overlay = document.querySelector('.overlay');
 
         this.setLoaders();
         this.startLoading();
@@ -35,9 +37,17 @@ export default class Resources extends EventEmitter {
         // Load each source
         for (const source of this.assets) {
             if (source.type === 'gltf') {
-                this.loaders.gltfLoader.load(source.path, (file) => {
-                    this.sourceLoaded(source, file);
-                });
+                this.loaders.gltfLoader.load(
+                    source.path,
+                    (file) => {
+                        this.sourceLoaded(source, file);
+                    },
+                    (progress) => {
+                        this.overlay.style.clipPath = `inset(0 ${
+                            100 - (progress.loaded / progress.total) * 100
+                        }% 0 0)`;
+                    }
+                );
             } else if (source.type === 'texture') {
                 this.loaders.textureLoader.load(source.path, (file) => {
                     this.sourceLoaded(source, file);
@@ -56,6 +66,7 @@ export default class Resources extends EventEmitter {
         this.loaded++;
 
         if (this.loaded === this.toLoad) {
+            this.preloader.style.opacity = 0;
             this.trigger('ready');
         }
     }
